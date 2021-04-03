@@ -1,0 +1,1 @@
+java -jar -Dserver.port=8086 ../target/PS-0.0.1-SNAPSHOT.war

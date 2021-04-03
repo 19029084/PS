@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>	
+	
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.3.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.synopsys</groupId>
+	<artifactId>PS</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>PS</name>
+	<description>Demo project for Spring Boot</description>
+	<packaging>war</packaging>
+	
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+	
+    <repositories>
+       <repository>
+           <id>third</id>
+           <url>file://${project.basedir}/lib</url>
+       </repository>
+    </repositories>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+		</dependency>
+	
+		<!-- servlet依赖 -->
+        <dependency>
+              <groupId>javax.servlet</groupId>
+              <artifactId>javax.servlet-api</artifactId>    
+        </dependency>
+        <dependency>
+              <groupId>javax.servlet</groupId>
+              <artifactId>jstl</artifactId>
+        </dependency>
+        <!-- tomcat的支持-->
+        <dependency>
+               <groupId>org.apache.tomcat.embed</groupId>
+               <artifactId>tomcat-embed-jasper</artifactId>
+        </dependency>
+		
+		<dependency>
+            <groupId>avax.xml.soap</groupId>
+            <artifactId>saaj</artifactId>
+			<version>1.3</version>
+			<scope>system</scope>
+            <systemPath>${pom.basedir}/lib/saaj.jar</systemPath>
+        </dependency>
+		
+		<!--dependency>
+            <groupId>xws-security</groupId>
+            <artifactId>xws-security</artifactId>
+			<version>1.3</version>
+			<scope>system</scope>
+            <systemPath>${pom.basedir}/lib/xws-security.jar</systemPath>
+        </dependency-->
+		<dependency>
+			   <groupId>com.sun.xml.wss</groupId>
+			   <artifactId>xws-security</artifactId>
+			   <version>3.0</version>
+			   <exclusions>
+				   <exclusion>
+					   <groupId>javax.xml.crypto</groupId>
+					   <artifactId>xmldsig</artifactId>
+				   </exclusion>
+			   </exclusions>
+		</dependency>	
+		<!--dependency>
+            <groupId>com.sun.xml.messaging.saaj</groupId>
+            <artifactId>saaj-impl</artifactId>
+			<version>1.3</version>
+			<scope>system</scope>
+            <systemPath>${pom.basedir}/lib/saaj-impl-1.3.jar</systemPath>
+        </dependency-->
+
+		<dependency>
+		  <groupId>javax.xml.bind</groupId>
+		  <artifactId>jaxb-api</artifactId>
+		  <version>2.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.xml.ws</groupId>
+			<artifactId>jaxws-api</artifactId>
+			<version>2.2.6</version>
+		</dependency>		
+		<!--dependency>
+			<groupId>javax.jws</groupId>
+			<artifactId>javax.jws-api</artifactId>
+			<version>1.1</version>
+		</dependency-->
+		
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-rt</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.sun.xml.messaging.saaj</groupId>
+			<artifactId>saaj-impl</artifactId>
+			<version>1.5.1</version>
+		</dependency>
+		<!--dependency>
+			<groupId>javax.xml.soap</groupId>
+			<artifactId>saaj-api</artifactId>
+			<version>1.3.5</version>
+		</dependency-->
+		<dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.4.5</version>
+        </dependency>
+
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
+		</dependency>
+ 
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.18</version>
+		</dependency>
+		
+		<!-- mybatis -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>2.0.0</version>
+        </dependency>
+		<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.13</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		
+
+
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			
+            <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-jar-plugin</artifactId>
+				 <configuration>
+　　　　　　　　	<compilerArguments>
+　　　　　　　　　　	<extdirs>${project.basedir}/lib</extdirs>
+						<bootclasspath>${JAVA_HOME}/jre/lib/rt.jar</bootclasspath>
+					</compilerArguments>
+				 </configuration>
+             </plugin>			
+			
+		</plugins>
+		
+		
+
+	</build>
+
+</project>

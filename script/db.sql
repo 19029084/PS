@@ -1,0 +1,108 @@
+
+SET NAMES utf8mb4;
+
+-- DEFAULT CHARACTER SET utf8;
+
+drop database IF EXISTS PS;
+
+create database PS;
+
+USE PS;
+
+
+CREATE TABLE Endpoint
+(
+	Id int(11) NOT NULL AUTO_INCREMENT,
+	Scheme VARCHAR(10), -- https / http
+	Username VARCHAR(25),
+	Password VARCHAR(50),
+	Host VARCHAR(50),
+	Port VARCHAR(25),	
+	-- host_url VARCHAR(100), -- https://user:password@www.endpoint.com:8088 
+	PRIMARY KEY(Id)
+);
+
+CREATE TABLE Workspace
+(
+	Id int(11) NOT NULL AUTO_INCREMENT,
+	Name VARCHAR(50),
+	PRIMARY KEY(ID)	
+);
+
+CREATE TABLE Task
+( 
+	Id int(11) NOT NULL AUTO_INCREMENT,
+	
+	-- WorkspaceId int(11) NOT NULL,
+	EndpointId int(11) NOT NULL,
+	-- wID int(11) NOT NULL,
+	UniqueKey VARCHAR(50),
+	Workspace VARCHAR(25),
+	Project VARCHAR(25),
+	Stream VARCHAR(25),
+	Source VARCHAR(50),
+	Status VARCHAR(20),
+	CreateDate DATE,
+	Deleted int NOT NULL DEFAULT 0,
+	PRIMARY KEY(ID)	
+);
+
+CREATE TABLE Stage
+( 
+	Id int(11) NOT NULL AUTO_INCREMENT,
+	Name VARCHAR(25),
+	Command VARCHAR(200),
+	PRIMARY KEY(ID)	
+);
+
+
+
+insert into Stage(ID,Name) values(1,"create");
+insert into Stage(ID,Name) values(2,"pending");
+insert into Stage(ID,Name) values(3,"setup");
+insert into Stage(ID,Name) values(4,"configure");
+insert into Stage(ID,Name) values(5,"build");
+insert into Stage(ID,Name) values(6,"analyze");
+insert into Stage(ID,Name) values(7,"commit");
+insert into Stage(ID,Name) values(8,"cleanup");
+insert into Stage(ID,Name) values(9,"done");
+
+/*
+CREATE TABLE `ps_user`
+{
+	id INT(11),
+	endpointId INT(11),
+	username VARCHAR(25),
+	password VARCHAR(50)	
+};
+
+
+
+
+
+
+CREATE TABLE `ps_stage`
+(
+	id INT(11),
+	workspaceId INT(11),
+	description VARCHAR(25),
+	script VARCHAR(200)
+);*/
+/*
+insert into ps_endpoint(id,endpoint) values(1,"http://127.0.0.1:8086");
+
+insert into ps_user(id,endpointId,username,password) values(1,1,"admin","coverity");
+
+insert into ps_workspace(id,endpointId,workspace) values(1,1,"DEMO");
+
+insert into ps_stage(id,workspaceId,description,script) values(1,1,"env","coverity/env.bat");
+insert into ps_stage(id,workspaceId,description,script) values(2,1,"configure","coverity/configure.bat");
+insert into ps_stage(id,workspaceId,description,script) values(3,1,"build","coverity/build.bat");
+insert into ps_stage(id,workspaceId,description,script) values(4,1,"analysis","coverity/analysis.bat");
+insert into ps_stage(id,workspaceId,description,script) values(5,1,"commit","coverity/commit.bat");*/
+
+
+
+
+
+

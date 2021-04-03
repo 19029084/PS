@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.synopsys.mapper.MainMapper" >
+    <resultMap id="PSTask" type="com.synopsys.entity.PSTask" >
+        <id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="UniqueKey" property="uniqueKey" jdbcType="VARCHAR" />        
+		<result column="Workspace" property="workspace" jdbcType="VARCHAR" />
+        <result column="Project" property="project" jdbcType="VARCHAR" />
+        <result column="Stream" property="stream" jdbcType="VARCHAR" />
+		<result column="Source" property="source" jdbcType="VARCHAR" />
+        <result column="Status" property="status" jdbcType="VARCHAR" />
+    </resultMap>
+	
+	<sql id="Base_Column_List" >
+        ID, Project
+	</sql> 
+	
+	<select id="selectAllTasks" resultMap="PSTask">
+        SELECT ID, EndpointId,uniqueKey, Workspace,Project,Stream,Source,Status
+        FROM Task
+		Where Deleted = 0
+    </select>
+	
+	<select id="selectOneTask" resultMap="PSTask">
+        SELECT ID, EndpointId,uniqueKey, Workspace,Project,Stream,Source,Status        
+        FROM Task		
+		Where ID=#{id}
+    </select>	
+	
+	<select id="selectDeletedTasks" resultMap="PSTask">
+        SELECT ID, EndpointId,uniqueKey, Workspace,Project,Stream,Source,Status        
+        FROM Task		
+		Where Deleted = 1
+    </select>
+	
+	<update id="deleteOneTask" >
+        UPDATE Task
+		Set Deleted = 1
+		Where ID=#{id}
+    </update>
+
+	
+	<insert id="createTask">
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			SELECT LAST_INSERT_ID()		
+		</selectKey>		
+		insert into Task(EndpointId,UniqueKey,Workspace,Project,Stream,Source,Status,CreateDate)
+		select #{endpointId},#{uniqueKey},#{workspace},#{project},#{stream},#{source},#{status},NOW()
+		from dual 
+		where not exists(select * from Task where UniqueKey=#{uniqueKey})
+	</insert>
+	
+	<select id="selectPendingTasks" resultMap="PSTask">
+        SELECT Id,endpointId,uniqueKey, Workspace,Project,Stream,Source,Status
+        FROM Task 
+		Where Status &lt;&gt; &quot;Done&quot; and Deleted =0
+	</select>
+	
+	<update id="updateTaskStatus" >
+        Update Task
+        Set Status=#{status} 
+		Where Id=#{task.id}
+	</update>	
+	
+	
+	
+	<select id="selectAllWorkspaces" resultType="java.lang.String">
+        SELECT Name
+        FROM Workspace
+	</select>	
+	
+    <resultMap id="CoverityEndpoint" type="com.synopsys.coverity.CoverityEndpoint" >
+        <id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="Scheme" property="scheme" jdbcType="VARCHAR" />        
+		<result column="Host" property="host" jdbcType="VARCHAR" />
+        <result column="Port" property="port" jdbcType="VARCHAR" />
+        <result column="Username" property="username" jdbcType="VARCHAR" />
+		<result column="Password" property="password" jdbcType="VARCHAR" />
+    </resultMap>	
+	
+	<insert id="createEndpoint">
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			SELECT LAST_INSERT_ID()		
+		</selectKey>		
+		insert into Endpoint(Scheme,Host,Port,Username,Password)
+			select #{scheme},#{host},#{port},#{username},#{password}
+			from dual 
+		where not exists(select * from Endpoint where scheme=#{scheme} and host = #{host} and port = #{port} and username = #{username})
+	</insert>
+
+
+	<select id="isExists" resultType="boolean">
+        SELECT EXISTS(select 1 from Endpoint where scheme=#{scheme} and host = #{host} and port = #{port} and username = #{username})
+	</select>
+	
+	<select id="loadEndpoint" resultMap="CoverityEndpoint">
+        select Id, Scheme,Host,Port,Username,Password
+		from Endpoint 
+		where scheme=#{scheme} and host = #{host} and port = #{port} and username = #{username}
+	</select>
+	
+	<select id="loadEndpointById" resultMap="CoverityEndpoint">
+        select Id, Scheme,Host,Port,Username,Password
+		from Endpoint 
+		where Id=#{endpointId}
+	</select>
+
+</mapper>
