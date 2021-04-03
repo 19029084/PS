@@ -260,7 +260,7 @@ CoverityEndpoint endpoint = (CoverityEndpoint)session.getAttribute("endpoint");
       </a>
       <div class="logo-name">Coverity V2020.09</div>
     </div>
-    <div class="nav-item active">
+    <div class="nav-item ">
 	<a href="/display?action=list">
       <div>
         <img src="./assets/img/list.png" />
@@ -269,7 +269,7 @@ CoverityEndpoint endpoint = (CoverityEndpoint)session.getAttribute("endpoint");
       <div>扫描项目列表</div>
 	  </a>
     </div>
-    <div class="nav-item">
+    <div class="nav-item active">
       <a href="/display?action=create">
 	  <div>
         <img src="./assets/img/scan.png" />
