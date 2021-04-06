@@ -128,7 +128,7 @@ request.setCharacterEncoding("utf-8");
       <a href="">
         <div class="logo"></div>
       </a>
-      <div class="logo-name">Coverity V2020.09</div>
+      <div class="logo-name">Coverity V2021.03</div>
     </div>
   </div>
 </header>

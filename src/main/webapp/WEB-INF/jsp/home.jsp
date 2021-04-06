@@ -281,6 +281,7 @@ PageInfo<PSTask> pageInfo = (PageInfo<PSTask>) request.getAttribute("pageInfo");
       <th>项目名称</th>
 	  <th>数据流</th>
       <th>项目状态</th>
+	  <th>创建时间</th>
       <th>详细信息</th>
 	  <th></th>
     </tr>
@@ -300,6 +301,8 @@ PageInfo<PSTask> pageInfo = (PageInfo<PSTask>) request.getAttribute("pageInfo");
 			<td><%=tsk.getProject()%></td>
 			<td><%=tsk.getStream()%></td>
 			<td><%=tsk.getStatus()%></td>
+			<td><%=tsk.getCreateDateTime()%></td>
+			
 			<%if("Done".equalsIgnoreCase(tsk.getStatus())){%>
 				<td>				
 						<a href="/download/<%=tsk.getWorkspace()%>/<%=PSUtil.logFile(tsk.getUniqueKey())%>" >details</a>
@@ -329,6 +332,7 @@ PageInfo<PSTask> pageInfo = (PageInfo<PSTask>) request.getAttribute("pageInfo");
 				<td> </td>
 				<td> </td>
 				<td> </td>	
+				<td> </td>
 			</tr>
 <%
 	}

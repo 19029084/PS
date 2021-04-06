@@ -94,6 +94,16 @@ public class PSTask
 	{
 		return m_endpointId;
 	}	
+	public void setCreateDateTime(String createDateTime)
+	{
+		m_createDateTime = createDateTime;
+	}
+	
+	public String getCreateDateTime()
+	{
+		return m_createDateTime;
+	}	
+	
 	
 	private int m_id;
 	private String m_workspace;
@@ -103,6 +113,7 @@ public class PSTask
 	private String m_status;
 	private String m_uniqueKey;
 	private String m_endpointId;
+	private String m_createDateTime;
 	
 	private String m_log;
 	

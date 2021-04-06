@@ -1,71 +1,71 @@
 
-SET NAMES utf8mb4;
+-- SET NAMES utf8mb4;
 
 -- DEFAULT CHARACTER SET utf8;
 
-drop database IF EXISTS PS;
+-- drop database IF EXISTS PS;
 
-create database PS;
+-- create database PS;
 
-USE PS;
+-- USE PS;
 
 
 CREATE TABLE Endpoint
 (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	Scheme VARCHAR(10), -- https / http
-	Username VARCHAR(25),
-	Password VARCHAR(50),
-	Host VARCHAR(50),
-	Port VARCHAR(25),	
+	Id INTEGER,
+	Scheme TEXT , -- https / http
+	Username TEXT,
+	Password TEXT,
+	Host TEXT,
+	Port TEXT,	
 	-- host_url VARCHAR(100), -- https://user:password@www.endpoint.com:8088 
 	PRIMARY KEY(Id)
 );
 
 CREATE TABLE Workspace
 (
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	Name VARCHAR(50),
+	Id INTEGER NOT NULL ,
+	Name TEXT,
 	PRIMARY KEY(ID)	
 );
 
 CREATE TABLE Task
 ( 
-	Id int(11) NOT NULL AUTO_INCREMENT,
+	Id INTEGER,
 	
 	-- WorkspaceId int(11) NOT NULL,
-	EndpointId int(11) NOT NULL,
+	EndpointId INTEGER NOT NULL,
 	-- wID int(11) NOT NULL,
-	UniqueKey VARCHAR(50),
-	Workspace VARCHAR(25),
-	Project VARCHAR(25),
-	Stream VARCHAR(25),
-	Source VARCHAR(50),
-	Status VARCHAR(20),
-	CreateDate DATE,
+	UniqueKey TEXT,
+	Workspace TEXT,
+	Project TEXT,
+	Stream TEXT,
+	Source TEXT,
+	Status TEXT,
+	CreateDateTime DEFAULT CURRENT_TIMESTAMP,
 	Deleted int NOT NULL DEFAULT 0,
 	PRIMARY KEY(ID)	
 );
 
 CREATE TABLE Stage
 ( 
-	Id int(11) NOT NULL AUTO_INCREMENT,
-	Name VARCHAR(25),
-	Command VARCHAR(200),
+	Id INTEGER,
+	Name TEXT,
+	Command TEXT,
 	PRIMARY KEY(ID)	
 );
 
 
 
-insert into Stage(ID,Name) values(1,"create");
-insert into Stage(ID,Name) values(2,"pending");
-insert into Stage(ID,Name) values(3,"setup");
-insert into Stage(ID,Name) values(4,"configure");
-insert into Stage(ID,Name) values(5,"build");
-insert into Stage(ID,Name) values(6,"analyze");
-insert into Stage(ID,Name) values(7,"commit");
-insert into Stage(ID,Name) values(8,"cleanup");
-insert into Stage(ID,Name) values(9,"done");
+-- insert into Stage(ID,Name) values(1,"create");
+-- insert into Stage(ID,Name) values(2,"pending");
+-- insert into Stage(ID,Name) values(3,"setup");
+-- insert into Stage(ID,Name) values(4,"configure");
+-- insert into Stage(ID,Name) values(5,"build");
+-- insert into Stage(ID,Name) values(6,"analyze");
+-- insert into Stage(ID,Name) values(7,"commit");
+-- insert into Stage(ID,Name) values(8,"cleanup");
+-- insert into Stage(ID,Name) values(9,"done");
 
 /*
 CREATE TABLE `ps_user`

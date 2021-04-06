@@ -64,7 +64,7 @@ CoverityEndpoint endpoint = (CoverityEndpoint)session.getAttribute("endpoint");
     }
 
     .logo {
-      background-image: background-image: url('/static/assets/img/logo_coverity.png');
+      background-image: url('/static/assets/img/logo_coverity.png');
       background-position: 50% 50%;
       background-size: cover;
       background-repeat: no-repeat;
@@ -258,7 +258,7 @@ CoverityEndpoint endpoint = (CoverityEndpoint)session.getAttribute("endpoint");
       <a href="">
         <div class="logo"></div>
       </a>
-      <div class="logo-name">Coverity V2020.09</div>
+      <div class="logo-name">Coverity V2021.03</div>
     </div>
     <div class="nav-item ">
 	<a href="/display?action=list">
