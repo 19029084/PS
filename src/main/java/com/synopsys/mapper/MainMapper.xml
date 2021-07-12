@@ -8,7 +8,8 @@
 		<result column="Workspace" property="workspace" jdbcType="VARCHAR" />
         <result column="Project" property="project" jdbcType="VARCHAR" />
         <result column="Stream" property="stream" jdbcType="VARCHAR" />
-		<result column="Source" property="source" jdbcType="VARCHAR" />
+		<result column="Genre" property="genre" jdbcType="VARCHAR" />
+		<result column="Source" property="source" jdbcType="VARCHAR" />		
         <result column="Status" property="status" jdbcType="VARCHAR" />
 		<result column="CreateDateTime" property="createDateTime" jdbcType="VARCHAR" />
 		
@@ -19,19 +20,19 @@
 	</sql> 
 	
 	<select id="selectAllTasks" resultMap="PSTask">
-        SELECT ID, EndpointId,uniqueKey, Workspace,Project,Stream,Source,Status,datetime(CreateDateTime,'localtime') as CreateDateTime       
+        SELECT ID, EndpointId,uniqueKey, Workspace,Project,Stream,Source,Genre,Status,datetime(CreateDateTime,'localtime') as CreateDateTime       
         FROM Task
 		Where Deleted = 0
     </select>
 	
 	<select id="selectOneTask" resultMap="PSTask">
-        SELECT ID, EndpointId,uniqueKey, Workspace,Project,Stream,Source,Status,datetime(CreateDateTime,'localtime') as CreateDateTime       
+        SELECT ID, EndpointId,uniqueKey, Workspace,Project,Stream,Genre,Source,Status,datetime(CreateDateTime,'localtime') as CreateDateTime       
         FROM Task		
 		Where ID=#{id}
     </select>	
 	
 	<select id="selectDeletedTasks" resultMap="PSTask">
-        SELECT ID, EndpointId,uniqueKey, Workspace,Project,Stream,Source,Status,datetime(CreateDateTime,'localtime') as CreateDateTime        
+        SELECT ID, EndpointId,uniqueKey, Workspace,Project,Stream,Genre,Source,Status,datetime(CreateDateTime,'localtime') as CreateDateTime        
         FROM Task		
 		Where Deleted = 1
     </select>
@@ -47,13 +48,13 @@
 		<selectKey resultType="int" keyProperty="id" order="AFTER">
 			SELECT last_insert_rowid()		
 		</selectKey>		
-		insert into Task(EndpointId,UniqueKey,Workspace,Project,Stream,Source,Status)
-			select #{endpointId},#{uniqueKey},#{workspace},#{project},#{stream},#{source},#{status}		
+		insert into Task(EndpointId,UniqueKey,Workspace,Project,Stream,Genre,Source,Status)
+			select #{endpointId},#{uniqueKey},#{workspace},#{project},#{stream},#{genre},#{source},#{status}		
 		where not exists(select * from Task where UniqueKey=#{uniqueKey})
 	</insert>
 	
 	<select id="selectPendingTasks" resultMap="PSTask">
-        SELECT Id,endpointId,uniqueKey, Workspace,Project,Stream,Source,Status,datetime(CreateDateTime,'localtime') as CreateDateTime
+        SELECT Id,endpointId,uniqueKey, Workspace,Project,Stream,Genre,Source,Status,datetime(CreateDateTime,'localtime') as CreateDateTime
         FROM Task 
 		Where Status &lt;&gt; &quot;Done&quot; and Deleted =0
 	</select>

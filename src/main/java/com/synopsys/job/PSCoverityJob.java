@@ -72,6 +72,8 @@ public class PSCoverityJob implements DisposableBean,Runnable {
                 }
             } else {
 				
+				//System.out.println(deletedTasks.size()+" tasks will be deleted!");
+				
 				for(int i=0;i<deletedTasks.size();i++)
 				{
 					PSTask task = deletedTasks.get(i);

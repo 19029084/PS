@@ -157,15 +157,60 @@ public class MainController {
 		}
 
 	}
-	
-	@PostMapping("/createTask")
+	@PostMapping("/task/url")
 	public String createTask(
 							@RequestParam("endpoint") String endpoint,
 							@RequestParam("workspace") String workspace,
 							@RequestParam("project") String project,
 							@RequestParam("stream") String stream,
-							@RequestParam("source") MultipartFile source)
+							@RequestParam("sourceURL") String source)
 	{
+					
+			System.out.println("Create URL Task");
+					
+			//try
+			{
+				String dirName = UPLOADED+File.separator+workspace;
+				
+				String uuid =  UUID.randomUUID().toString().replaceAll("-", "");
+				
+				
+				
+				String ext= null;
+				
+				if(source!=null && source.length()>0 && source.contains(" ")){
+					ext = source.substring(0,source.indexOf(" ")).trim();
+					source=source.substring(source.lastIndexOf(" ")).trim();
+				}else{
+					ext = "zip";
+				}				
+				
+				System.out.println(ext+" source:"+source);
+				
+				mainService.createTask(endpoint,uuid,workspace,project,stream,ext,source);
+				
+				
+			}
+			//catch(IOException e)
+			{
+				//e.printStackTrace();
+			}
+			
+			return "redirect:/display?action=list";
+	
+	
+	
+	}
+	
+	@PostMapping("/task/file")
+	public String createTask(
+							@RequestParam("endpoint") String endpoint,
+							@RequestParam("workspace") String workspace,
+							@RequestParam("project") String project,
+							@RequestParam("stream") String stream,
+							@RequestParam("sourceFile") MultipartFile source)
+	{
+		System.out.println("Create File Task");
 		
 		if (source.isEmpty()) {
 		    return null;
@@ -176,7 +221,7 @@ public class MainController {
 		if(originalFilename.contains(".")){
 		    ext = originalFilename.substring(originalFilename.lastIndexOf("."));
 		}else{
-		    ext = "";
+		    ext = ".zip";
 		}
 
 
@@ -215,7 +260,7 @@ public class MainController {
 				
 				//source.transferTo(target);
 
-				mainService.createTask(endpoint,uuid,workspace,project,stream,uuid + ext);
+				mainService.createTask(endpoint,uuid,workspace,project,stream,ext.substring(1),uuid + ext);
 				
 				
 			}catch(IOException e)

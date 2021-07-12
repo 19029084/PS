@@ -24,9 +24,9 @@ public class MainService
     @Autowired
     private MainMapper mainMapper;
 	
-	public void createTask(String endpoint,String uniqueKey,String workspace,String project,String stream,String source)
+	public void createTask(String endpoint,String uniqueKey,String workspace,String project,String stream,String genre,String source)
 	{
-		PSTask task = new PSTask(endpoint,uniqueKey,workspace,project,stream,source);
+		PSTask task = new PSTask(endpoint,uniqueKey,workspace,project,stream,genre,source);
 		
 		mainMapper.createTask(task);	
 	}

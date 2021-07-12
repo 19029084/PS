@@ -8,7 +8,7 @@ public class PSTask
 		
 	}
 	
-	public PSTask(String endpointId,String uniqueKey,String workspace,String project,String stream,String source)
+	public PSTask(String endpointId,String uniqueKey,String workspace,String project,String stream,String genre,String source)
 	{
 		m_endpointId = endpointId;
 		m_uniqueKey = uniqueKey;
@@ -16,6 +16,7 @@ public class PSTask
 		m_project = project;
 		m_stream = stream;
 		m_source = source;
+		m_genre = genre;
 		m_status= "init";
 	}
 	
@@ -104,6 +105,16 @@ public class PSTask
 		return m_createDateTime;
 	}	
 	
+	public void setGenre(String genre)
+	{
+		m_genre = genre;
+	}
+	
+	public String getGenre()
+	{
+		return m_genre;
+	}		
+	
 	
 	private int m_id;
 	private String m_workspace;
@@ -114,6 +125,7 @@ public class PSTask
 	private String m_uniqueKey;
 	private String m_endpointId;
 	private String m_createDateTime;
+	private String m_genre;
 	
 	private String m_log;
 	

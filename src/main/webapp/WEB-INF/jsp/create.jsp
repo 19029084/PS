@@ -244,7 +244,40 @@ CoverityEndpoint endpoint = (CoverityEndpoint)session.getAttribute("endpoint");
                 }
         }
     } 
+	
+	function selectSource()
+	{
+		var objSourceType = document.getElementById('sourceType');
 
+		var objSourceURL = document.getElementById('sourceURL');
+		var objSourceFile = document.getElementById('sourceFile');
+		
+		var objForm = document.getElementById('taskForm');
+
+		if(objSourceType.value.length>0)
+		{
+			if(objSourceType.value=='1')
+			{
+				objSourceURL.style.display="";
+				objSourceFile.style.display="none";
+				objForm.action="/task/url";
+				
+			}
+			else if(objSourceType.value=='2')
+			{
+				objSourceURL.style.display="none";
+				objSourceFile.style.display="";
+				objForm.action="/task/file";
+			}
+			else
+			{
+				objSourceURL.style.display="none";
+				objSourceFile.style.display="none";
+				objForm.action="";
+
+			}
+		}
+	}
      
       
     </SCRIPT>
@@ -282,7 +315,7 @@ CoverityEndpoint endpoint = (CoverityEndpoint)session.getAttribute("endpoint");
 </header>
 
 <content>
-  <form action="/createTask" enctype="multipart/form-data" method="post" >
+  <form action="" enctype="multipart/form-data" id="taskForm" method="post" >
   
      <div class="input">
       <label>工作目录</label>
@@ -320,7 +353,16 @@ CoverityEndpoint endpoint = (CoverityEndpoint)session.getAttribute("endpoint");
 
     <div class="input">
       <label>项目源码</label>
-      <input name="source" type="file" />
+	  
+	  <select name="sourceType" id="sourceType" onchange="selectSource();">
+		<option value="0">请选择代码位置</option>
+		<option value = "1">代码仓库</option>
+		<option value = "2">代码文件</option>
+	  </select>
+	  
+       <input name="sourceFile" style="display:none" id="sourceFile" type="file" />
+	   <input name="sourceURL" style="display:none" id="sourceURL" />
+	  
     </div>
 	
 	<div class="input">
@@ -338,7 +380,7 @@ CoverityEndpoint endpoint = (CoverityEndpoint)session.getAttribute("endpoint");
 </content>
 
 <footer>
-  ©2021 Synopsys, Inc. All Rights Reserved
+  ©2022 Synopsys, Inc. All Rights Reserved
 </footer>
 </body>
 <script src="./assets/lib/jquery.min.js" ></script>

@@ -40,6 +40,7 @@ CREATE TABLE Task
 	Workspace TEXT,
 	Project TEXT,
 	Stream TEXT,
+	Genre TEXT,
 	Source TEXT,
 	Status TEXT,
 	CreateDateTime DEFAULT CURRENT_TIMESTAMP,
