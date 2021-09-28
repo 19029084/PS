@@ -75,6 +75,7 @@ public class PSCoverityThread extends Thread {
 					if (isWindows) {
 						try{
 							//commands.add(Arrays.asList("cmd.exe", "/c", "dir"));
+							
 							commands.add(Arrays.asList(curDir+"setup.bat",task.getUniqueKey(),task.getGenre(),task.getSource()));
 							
 							commands.add(Arrays.asList(curDir+"configure.bat",task.getUniqueKey()));
@@ -83,7 +84,7 @@ public class PSCoverityThread extends Thread {
 							
 							commands.add(Arrays.asList(curDir+"analyze.bat",task.getUniqueKey()));
 							
-							commands.add(Arrays.asList(curDir+"commit.bat",task.getUniqueKey(),endpoint.getHost(),endpoint.getPort(),endpoint.getUsername(),endpoint.getPassword(),task.getStream()));
+							commands.add(Arrays.asList(curDir+"commit.bat",task.getUniqueKey(),endpoint.getScheme(),endpoint.getHost(),endpoint.getPort(),endpoint.getUsername(),endpoint.getPassword(),task.getStream()));
 							
 							commands.add(Arrays.asList(curDir+"clean.bat",task.getUniqueKey(),task.getSource()));
 						}catch(Exception e)
@@ -92,6 +93,7 @@ public class PSCoverityThread extends Thread {
 						}
 					}else {
 						//commands.add(Arrays.asList("sh", "-c", "ls"));
+						
 						commands.add(Arrays.asList(curDir+"setup.sh",task.getUniqueKey(),task.getGenre(),task.getSource()));
 						
 						commands.add(Arrays.asList(curDir+"configure.sh",task.getUniqueKey()));
@@ -100,10 +102,11 @@ public class PSCoverityThread extends Thread {
 						
 						commands.add(Arrays.asList(curDir+"analyze.sh",task.getUniqueKey()));
 						
-						commands.add(Arrays.asList(curDir+"commit.sh",task.getUniqueKey(),endpoint.getHost(),endpoint.getPort(),endpoint.getUsername(),endpoint.getPassword(),task.getStream()));
+						commands.add(Arrays.asList(curDir+"commit.sh",task.getUniqueKey(),endpoint.getScheme(),endpoint.getHost(),endpoint.getPort(),endpoint.getUsername(),endpoint.getPassword(),task.getStream()));
 						
 						commands.add(Arrays.asList(curDir+"clean.sh",task.getUniqueKey(),task.getSource()));
 					}
+					System.out.println(commands);
 					
 					File dir = new File(curDir);
 					

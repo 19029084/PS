@@ -1,8 +1,19 @@
-set PATH=%PATH%;C:\Program Files\7-Zip
-set PATH=%PATH%;C:\Projects\Coverity\2020.06\cov-analysis\bin
-set PATH=%PATH%;C:\Projects\apache-maven-3.6.3\bin
+#!/usr/bin/env bash
+
+echo "Setup environment...\n"
+
+export PATH=$PATH:~/Projects/cov-analysis-linux64-2020.03/bin
+export PATH=$PATH:/usr/bin
+
+export TEMP=~/tmp
+
+export PROJECT=apache-shardingsphere-5.0.0-beta-src-release
+
+export BUILD="mvn clean install -Prelease"
 
 
 
-set COMPILER=java
-set BUILD=mvn clean package
+
+
+
+

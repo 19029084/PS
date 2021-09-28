@@ -35,7 +35,37 @@ public class CoverityEndpoint
 	{
 		//m_server = server;
 		//m_port = port;
-		m_hostUrl = hostUrl;		
+		//m_hostUrl = hostUrl;
+		try
+		{
+			
+			URL u = new URL(hostUrl);
+			m_scheme = u.getProtocol();
+			System.out.println("scheme"+m_scheme);
+			m_host=u.getHost();
+			if(u.getPort()==-1)
+			{
+				if(m_scheme.equalsIgnoreCase("http"))
+				{
+					m_port=String.valueOf(80);
+				}else if(m_scheme.equalsIgnoreCase("https"))
+				{
+					m_port=String.valueOf(443);
+				}
+				else
+				{
+					m_port=String.valueOf(-1);
+				}
+			}
+			else
+			{
+				m_port=String.valueOf(u.getPort());
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
 		m_username = username;
 		m_password = password;
 	}
@@ -137,6 +167,7 @@ public class CoverityEndpoint
 		}
 		else
 		{
+			System.out.println("URL:" +m_scheme+"://"+m_host+":"+m_port);
 			return m_scheme+"://"+m_host+":"+m_port;
 		}
 	}
