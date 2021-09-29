@@ -2,7 +2,7 @@
 
 source ./env.sh
 
-zip a $TEMP/log_$1.zip $TEMP/$1/idir
+zip -r $TEMP/log_$1.zip $TEMP/$1/idir
 
-#rm -rf  "$TEMP/$1"
+rm -rf  "$TEMP/$1"
 
